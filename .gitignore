@@ -8,4 +8,5 @@ coverage/
 *.log
 .DS_Store
 *.tsbuildinfo
-
+packages/*/src/*.js
+packages/*/src/*.d.ts
