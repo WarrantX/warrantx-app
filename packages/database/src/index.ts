@@ -10,6 +10,9 @@ export function getDatabase() {
   if (dbInstance) return dbInstance;
 
   const dbUrl = process.env.DATABASE_URL;
+  if (process.env.NODE_ENV === 'production' && !dbUrl) {
+    throw new Error('DATABASE_URL is required in production');
+  }
   if (dbUrl && dbUrl.startsWith('postgres')) {
     const pool = new Pool({ connectionString: dbUrl });
     dbInstance = drizzlePg(pool, { schema });

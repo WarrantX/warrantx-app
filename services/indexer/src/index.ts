@@ -5,10 +5,14 @@ import { eq } from 'drizzle-orm';
 
 export class WarrantXIndexer {
   private server: rpc.Server;
-  private networkConfig = getNetworkConfig('testnet');
+  private networkConfig = getNetworkConfig(process.env.STELLAR_NETWORK || 'testnet');
+  private contractId: string;
   private isRunning = false;
 
   constructor() {
+    const contractId = process.env.STELLAR_TREASURY_CONTRACT_ID;
+    if (!contractId) throw new Error('STELLAR_TREASURY_CONTRACT_ID is required');
+    this.contractId = contractId;
     this.server = new rpc.Server(this.networkConfig.rpcUrl);
   }
 
@@ -54,8 +58,8 @@ export class WarrantXIndexer {
     // Fetch Soroban RPC events
     const response = await this.server.getEvents({
       startLedger,
-      filters: [],
-      limit: 50,
+      filters: [{ type: 'contract', contractIds: [this.contractId] }],
+      limit: 100,
     });
 
     for (const event of response.events) {
@@ -74,7 +78,7 @@ export class WarrantXIndexer {
     } else {
       await db.insert(indexerCheckpoints).values({
         id: 'global_checkpoint',
-        contractAddress: 'GLOBAL',
+          contractAddress: this.contractId,
         lastLedger: currentLedger,
         updatedAt: new Date(),
       });

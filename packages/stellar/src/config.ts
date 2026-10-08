@@ -24,5 +24,9 @@ export const NETWORKS: Record<string, StellarNetworkConfig> = {
 };
 
 export function getNetworkConfig(network = 'testnet'): StellarNetworkConfig {
-  return NETWORKS[network] || NETWORKS.testnet;
+  const config = NETWORKS[network];
+  if (!config) {
+    throw new Error(`Unsupported Stellar network: ${network}`);
+  }
+  return config;
 }
