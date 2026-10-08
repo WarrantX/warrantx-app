@@ -107,7 +107,7 @@ app.get('/api/v1/policies', async (req, res) => {
   }
 });
 
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`[WarrantX API] Server running on http://localhost:${PORT}`);
   });
