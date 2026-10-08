@@ -1,0 +1,23 @@
+{
+  "name": "warrantx-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "pnpm --recursive run build",
+    "dev": "pnpm --parallel run dev",
+    "test": "pnpm --recursive --if-present run test",
+    "lint": "pnpm --recursive run lint",
+    "db:push": "pnpm --filter @warrantx/database run db:push",
+    "db:generate": "pnpm --filter @warrantx/database run db:generate",
+    "db:migrate": "pnpm --filter @warrantx/database run db:migrate"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
