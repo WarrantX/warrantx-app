@@ -7,6 +7,7 @@ import { ShieldCheck, Plus, ArrowDownLeft, Wallet, Building2, ExternalLink } fro
 import { Button, Card, CardTitle, CardDescription, Badge } from '@warrantx/ui';
 
 export default function TreasuryPage() {
+  const contractId = process.env.NEXT_PUBLIC_TREASURY_CONTRACT_ID;
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
       <Navbar />
@@ -30,10 +31,10 @@ export default function TreasuryPage() {
           <Card className="glass-panel border-emerald-500/30">
             <div className="flex items-start justify-between">
               <div>
-                <Badge variant="emerald" className="mb-2">Active Contract Treasury</Badge>
+                <Badge variant={contractId ? 'emerald' : 'amber'} className="mb-2">{contractId ? 'Configured Contract Treasury' : 'Demo Preview'}</Badge>
                 <CardTitle className="text-xl">Core Protocol Treasury</CardTitle>
                 <p className="text-xs font-mono text-slate-400 mt-1">
-                  CC2W...9K1Z
+                  {contractId || 'No contract configured - sample values only'}
                 </p>
               </div>
               <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-400">

@@ -6,6 +6,7 @@ import { Send, AlertCircle, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { Button, Card, CardTitle, CardDescription, Badge } from '@warrantx/ui';
 
 export default function PaymentRequestPage() {
+  const contractId = process.env.NEXT_PUBLIC_TREASURY_CONTRACT_ID;
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
@@ -17,6 +18,7 @@ export default function PaymentRequestPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!contractId) return;
     setIsSubmitting(true);
     setTimeout(() => {
       setIsSubmitting(false);
@@ -37,6 +39,12 @@ export default function PaymentRequestPage() {
           <CardDescription>
             Request payment bound to your on-chain spending policy limits
           </CardDescription>
+
+          {!contractId && (
+            <div className="mt-4 p-3 rounded-lg text-xs border bg-amber-500/10 border-amber-500/30 text-amber-300">
+              Transactions are disabled until NEXT_PUBLIC_TREASURY_CONTRACT_ID is configured. No wallet request will be simulated.
+            </div>
+          )}
 
           {submitted ? (
             <div className="mt-6 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm text-center">
@@ -93,7 +101,7 @@ export default function PaymentRequestPage() {
                 </div>
               )}
 
-              <Button type="submit" variant="primary" className="w-full mt-4" isLoading={isSubmitting}>
+              <Button type="submit" variant="primary" className="w-full mt-4" isLoading={isSubmitting} disabled={!contractId}>
                 Sign & Submit Payment Request
               </Button>
             </form>

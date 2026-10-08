@@ -7,6 +7,7 @@ import { ShieldCheck, ArrowUpRight, ArrowDownLeft, Plus, Users, Wallet, Clock, A
 import { Button, Card, CardTitle, CardDescription, Badge } from '@warrantx/ui';
 
 export default function DashboardPage() {
+  const isConfigured = Boolean(process.env.NEXT_PUBLIC_TREASURY_CONTRACT_ID);
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
       <Navbar />
@@ -17,10 +18,10 @@ export default function DashboardPage() {
           <div>
             <h1 className="text-2xl font-bold text-slate-100 flex items-center space-x-3">
               <span>Main Organization Treasury</span>
-              <Badge variant="emerald">Testnet Active</Badge>
+              <Badge variant={isConfigured ? 'emerald' : 'amber'}>{isConfigured ? 'Configured' : 'Demo Preview'}</Badge>
             </h1>
             <p className="text-xs text-slate-400 mt-1 font-mono">
-              Contract Address: CC2W...9K1Z
+              Contract Address: {process.env.NEXT_PUBLIC_TREASURY_CONTRACT_ID || 'Not configured - values below are sample data'}
             </p>
           </div>
           <div className="mt-4 md:mt-0 flex space-x-3">
