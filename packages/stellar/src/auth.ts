@@ -35,7 +35,8 @@ export function verifyWalletSignature(
     }
 
     const timestamp = parseInt(parts[3], 10);
-    if (isNaN(timestamp) || Date.now() - timestamp > 5 * 60 * 1000) {
+    const age = Date.now() - timestamp;
+    if (isNaN(timestamp) || age < 0 || age > 5 * 60 * 1000) {
       return false; // Challenge expired
     }
 
