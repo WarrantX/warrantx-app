@@ -1,0 +1,11 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: WarrantX
+  structure:
+    - { type: space, key: introduction, title: Introduction, path: introduction, default: true, content: { directory: ./introduction } }
+    - { type: space, key: concepts, title: Core Concepts, path: concepts, content: { directory: ./concepts } }
+    - { type: space, key: contract, title: Smart Contracts, path: contract, content: { directory: ./contract } }
+    - { type: space, key: using, title: Using WarrantX, path: using, content: { directory: ./using } }
+    - { type: space, key: developer, title: Developer Guide, path: developer, content: { directory: ./developer } }
+    - { type: space, key: contributing, title: Contributing, path: contributing, content: { directory: ./contributing } }
+
