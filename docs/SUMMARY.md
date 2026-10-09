@@ -1,9 +1,11 @@
-# Summary
+# Table of contents
 
+* [WarrantX documentation](README.md)
 * [Introduction](introduction/what-is-warrantx.md)
-  * [What is WarrantX](introduction/what-is-warrantx.md)
-  * [How it works](introduction/how-it-works.md)
-  * [Architecture](introduction/architecture.md)
+  * [What is WarrantX?](introduction/what-is-warrantx.md)
+  * [How WarrantX works](introduction/how-it-works.md)
+  * [System architecture](introduction/architecture.md)
+  * [Release status](introduction/release-status.md)
 * [Core concepts](concepts/spending-policies.md)
   * [Spending policies](concepts/spending-policies.md)
   * [Approvals](concepts/approvals.md)
@@ -17,8 +19,10 @@
 * [Developer guide](developer/local-setup.md)
   * [Local setup](developer/local-setup.md)
   * [Environment variables](developer/environment-variables.md)
+  * [Deployment](developer/deployment.md)
   * [SDK reference](developer/sdk-reference.md)
   * [Indexer and API](developer/indexer-api-reference.md)
   * [Testing and release](developer/testing.md)
+  * [Troubleshooting](developer/troubleshooting.md)
 * [Contributing](contributing/how-to-contribute.md)
-
+* [Submission checklist](submission-checklist.md)
