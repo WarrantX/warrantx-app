@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stellar/freighter-api": "^6.0.1",
     "@warrantx/database": "workspace:*",
     "@warrantx/sdk": "workspace:*",
     "@warrantx/stellar": "workspace:*",

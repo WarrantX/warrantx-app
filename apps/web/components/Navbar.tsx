@@ -5,8 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Wallet, Bell } from 'lucide-react';
 import { Button } from '@warrantx/ui';
+import { useWallet } from './WalletProvider';
 
 export const Navbar: React.FC = () => {
+  const { address, connect, disconnect, error, isConnecting, network } = useWallet();
+  const shortAddress = address ? `${address.slice(0, 5)}…${address.slice(-5)}` : null;
+
   return (
     <nav className="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -28,14 +32,26 @@ export const Navbar: React.FC = () => {
           <Link href="/history" className="hover:text-emerald-400 transition-colors">History</Link>
         </div>
 
-        <div className="flex items-center space-x-3">
+        <div className="relative flex items-center space-x-3">
           <Link href="/notifications" className="p-2 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-900 transition-colors">
             <Bell className="w-5 h-5" />
           </Link>
-          <Button variant="outline" size="sm" disabled className="flex items-center space-x-2" title="Wallet adapter integration is not configured">
+          <Button
+            variant="outline"
+            size="sm"
+            className="flex items-center space-x-2"
+            isLoading={isConnecting}
+            onClick={address ? disconnect : () => void connect()}
+            title={address ? `Connected on ${network || 'Stellar'}. Click to disconnect.` : 'Connect Freighter wallet'}
+          >
             <Wallet className="w-4 h-4" />
-            <span>Wallet not connected</span>
+            <span>{shortAddress || 'Connect wallet'}</span>
           </Button>
+          {error && (
+            <div role="alert" className="absolute right-0 top-11 z-50 w-80 rounded-lg border border-rose-500/30 bg-slate-950 p-3 text-xs text-rose-300 shadow-xl">
+              {error}
+            </div>
+          )}
         </div>
       </div>
     </nav>
