@@ -41,7 +41,13 @@ export function verifyWalletSignature(
     }
 
     const keypair = Keypair.fromPublicKey(publicKey);
-    const messageBuffer = Buffer.from(challenge, 'utf-8');
+    // Freighter signMessage implements SEP-53: prefix the UTF-8 message and
+    // sign a single SHA-256 digest instead of signing the raw message bytes.
+    const encodedMessage = Buffer.concat([
+      Buffer.from('Stellar Signed Message:\n', 'utf-8'),
+      Buffer.from(challenge, 'utf-8'),
+    ]);
+    const messageBuffer = crypto.createHash('sha256').update(encodedMessage).digest();
     const signatureBuffer = Buffer.from(signatureBase64, 'base64');
 
     return keypair.verify(messageBuffer, signatureBuffer);

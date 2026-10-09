@@ -30,7 +30,14 @@ function apiError(error: unknown, fallback: string) {
 
 function signatureToBase64(signature: Buffer | string | null): string {
   if (!signature) throw new Error('Freighter did not return a signature');
-  if (typeof signature === 'string') return signature;
+  if (typeof signature === 'string') {
+    // Freighter API v4+ follows SEP-53 and returns the 64-byte signature as hex.
+    if (/^[0-9a-f]{128}$/i.test(signature)) {
+      const bytes = signature.match(/.{2}/g)?.map((byte) => Number.parseInt(byte, 16)) || [];
+      return window.btoa(String.fromCharCode(...bytes));
+    }
+    return signature;
+  }
   let binary = '';
   for (const byte of signature) binary += String.fromCharCode(byte);
   return window.btoa(binary);
