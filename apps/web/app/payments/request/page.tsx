@@ -2,8 +2,11 @@
 
 import React, { useState } from 'react';
 import { Navbar } from '../../../components/Navbar';
-import { Send, AlertCircle, CheckCircle2, ShieldCheck } from 'lucide-react';
-import { Button, Card, CardTitle, CardDescription, Badge } from '@warrantx/ui';
+import { Send } from 'lucide-react';
+import { Button, Card, CardTitle, CardDescription } from '@warrantx/ui';
+import { Address, nativeToScVal } from '@stellar/stellar-sdk';
+import { useWallet } from '../../../components/WalletProvider';
+import { submitContractTransaction, toStroops } from '../../../lib/contract-transaction';
 
 export default function PaymentRequestPage() {
   const contractId = process.env.NEXT_PUBLIC_TREASURY_CONTRACT_ID;
@@ -12,18 +15,33 @@ export default function PaymentRequestPage() {
   const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [transactionHash, setTransactionHash] = useState<string | null>(null);
+  const { address, connect, isConnecting } = useWallet();
 
   const numAmount = parseFloat(amount || '0');
-  const requiresApproval = false;
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!contractId) return;
+    if (!contractId || !address) return;
     setIsSubmitting(true);
-    setTimeout(() => {
+    setError(null);
+    try {
+      const metadata = new TextEncoder().encode(description);
+      const metadataHash = new Uint8Array(await window.crypto.subtle.digest('SHA-256', metadata));
+      const result = await submitContractTransaction(contractId, 'request_payment', [
+        new Address(address).toScVal(),
+        new Address(recipient).toScVal(),
+        nativeToScVal(toStroops(amount), { type: 'i128' }),
+        nativeToScVal(metadataHash, { type: 'bytes' }),
+        nativeToScVal(86_400, { type: 'u64' }),
+      ], address);
+      setTransactionHash(result.hash);
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 1500);
+    } catch (submissionError) {
+      setError(submissionError instanceof Error ? submissionError.message : 'Payment request failed');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -50,8 +68,9 @@ export default function PaymentRequestPage() {
             <div className="mt-6 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm text-center">
               <p className="font-semibold">Payment Request Submitted!</p>
               <p className="text-xs text-slate-300 mt-1">
-                {requiresApproval ? 'Status: Pending Approver Signatures (0/2)' : 'Status: Executed Automatically'}
+                The contract accepted the request. Check its on-chain state to determine whether approvals are required.
               </p>
+              {transactionHash && <a className="block mt-2 underline" href={`https://stellar.expert/explorer/testnet/tx/${transactionHash}`} target="_blank" rel="noreferrer">View transaction</a>}
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="mt-6 space-y-4">
@@ -94,9 +113,14 @@ export default function PaymentRequestPage() {
 
               {numAmount > 0 && <div className="p-3 rounded-lg text-xs border bg-slate-900 border-slate-700 text-slate-400"><span className="font-semibold">Policy check:</span> the configured Soroban contract will determine whether approvals are required when this request is submitted.</div>}
 
-              <Button type="submit" variant="primary" className="w-full mt-4" isLoading={isSubmitting} disabled={!contractId}>
+              {error && <p className="text-sm text-red-400">{error}</p>}
+              {!address ? (
+                <Button type="button" variant="primary" className="w-full mt-4" isLoading={isConnecting} onClick={() => void connect()}>
+                  Connect Testnet Wallet
+                </Button>
+              ) : <Button type="submit" variant="primary" className="w-full mt-4" isLoading={isSubmitting} disabled={!contractId}>
                 Sign & Submit Payment Request
-              </Button>
+              </Button>}
             </form>
           )}
         </Card>

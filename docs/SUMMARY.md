@@ -24,5 +24,6 @@
   * [Indexer and API](developer/indexer-api-reference.md)
   * [Testing and release](developer/testing.md)
   * [Troubleshooting](developer/troubleshooting.md)
+  * [Submission Demo](developer/submission-demo.md)
 * [Contributing](contributing/how-to-contribute.md)
 * [Submission checklist](submission-checklist.md)

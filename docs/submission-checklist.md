@@ -13,10 +13,11 @@ Use this page to evaluate whether a WarrantX release is ready for a Stellar ecos
 
 ## Product evidence
 
-- [ ] Public application deployment.
-- [ ] Public documentation URL.
-- [ ] Canonical Stellar testnet factory and treasury contract IDs.
-- [ ] Explorer links for deployment and representative transactions.
+- [x] Public application deployment.
+- [x] Public documentation URL.
+- [ ] Canonical Stellar testnet factory contract ID.
+- [x] Canonical Stellar testnet treasury contract ID.
+- [x] Explorer link for the deployed treasury contract.
 - [ ] End-to-end smoke-test record.
 - [ ] Short demo video showing treasury setup, deposit, policy, request, approval, and execution.
 
