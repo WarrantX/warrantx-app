@@ -14,7 +14,7 @@ export default function PaymentRequestPage() {
   const [submitted, setSubmitted] = useState(false);
 
   const numAmount = parseFloat(amount || '0');
-  const requiresApproval = numAmount > 200;
+  const requiresApproval = false;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,14 +92,7 @@ export default function PaymentRequestPage() {
                 />
               </div>
 
-              {numAmount > 0 && (
-                <div className={`p-3 rounded-lg text-xs border ${requiresApproval ? 'bg-amber-500/10 border-amber-500/30 text-amber-400' : 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'}`}>
-                  <span className="font-semibold">Policy Check: </span>
-                  {requiresApproval
-                    ? `Amount (${numAmount} USDC) exceeds auto-approval threshold (200 USDC). Request will require 2 approver signatures.`
-                    : `Amount (${numAmount} USDC) is within auto-approval threshold (&le; 200 USDC). Will execute automatically.`}
-                </div>
-              )}
+              {numAmount > 0 && <div className="p-3 rounded-lg text-xs border bg-slate-900 border-slate-700 text-slate-400"><span className="font-semibold">Policy check:</span> the configured Soroban contract will determine whether approvals are required when this request is submitted.</div>}
 
               <Button type="submit" variant="primary" className="w-full mt-4" isLoading={isSubmitting} disabled={!contractId}>
                 Sign & Submit Payment Request

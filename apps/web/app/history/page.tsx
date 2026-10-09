@@ -31,32 +31,7 @@ export default function HistoryPage() {
                   <th className="pb-3 text-right">Explorer</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
-                <tr>
-                  <td className="py-3.5 font-mono text-xs text-slate-300">a9c8...4f1e</td>
-                  <td className="py-3.5"><Badge variant="emerald">Payment Execution</Badge></td>
-                  <td className="py-3.5 font-mono text-xs text-slate-400">GBX...91KA</td>
-                  <td className="py-3.5 font-semibold text-slate-100">100.00 USDC</td>
-                  <td className="py-3.5 font-mono text-xs text-slate-400">#492102</td>
-                  <td className="py-3.5 text-right">
-                    <a href="https://stellar.expert/explorer/testnet" target="_blank" rel="noreferrer" className="text-xs text-emerald-400 hover:underline inline-flex items-center">
-                      View <ExternalLink className="w-3 h-3 ml-1" />
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 font-mono text-xs text-slate-300">b12d...90a1</td>
-                  <td className="py-3.5"><Badge variant="cyan">Deposit</Badge></td>
-                  <td className="py-3.5 font-mono text-xs text-slate-400">GAAX...4K9Z</td>
-                  <td className="py-3.5 font-semibold text-slate-100">12,500.00 USDC</td>
-                  <td className="py-3.5 font-mono text-xs text-slate-400">#491880</td>
-                  <td className="py-3.5 text-right">
-                    <a href="https://stellar.expert/explorer/testnet" target="_blank" rel="noreferrer" className="text-xs text-emerald-400 hover:underline inline-flex items-center">
-                      View <ExternalLink className="w-3 h-3 ml-1" />
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody><tr><td colSpan={6} className="py-10 text-center text-sm text-slate-500">No indexed on-chain transactions yet.</td></tr></tbody>
             </table>
           </div>
         </Card>

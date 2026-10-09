@@ -19,31 +19,7 @@ export default function NotificationsPage() {
         </div>
 
         <div className="space-y-4">
-          <Card className="glass-panel">
-            <div className="flex items-start space-x-3">
-              <div className="p-2 bg-amber-500/10 rounded-lg text-amber-400 mt-0.5">
-                <Clock className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-slate-200">New Payment Approval Required</p>
-                <p className="text-xs text-slate-400 mt-0.5">REQ-002 (450.00 USDC) submitted by Dev Core Spender requires your signature.</p>
-                <span className="text-[10px] text-slate-500 mt-2 block">10 minutes ago</span>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="glass-panel">
-            <div className="flex items-start space-x-3">
-              <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-400 mt-0.5">
-                <CheckCircle2 className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-slate-200">Payment Request Executed</p>
-                <p className="text-xs text-slate-400 mt-0.5">REQ-001 (100.00 USDC) transferred successfully to recipient.</p>
-                <span className="text-[10px] text-slate-500 mt-2 block">2 hours ago</span>
-              </div>
-            </div>
-          </Card>
+          <Card className="glass-panel py-12 text-center text-sm text-slate-500">No live notifications yet.</Card>
         </div>
       </main>
     </div>
