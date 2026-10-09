@@ -1,0 +1,43 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: WarrantX Documentation
+  description: Policy-controlled treasury operations on Stellar.
+  structure:
+    - type: space
+      key: introduction
+      title: Introduction
+      path: introduction
+      default: true
+      content:
+        directory: ./introduction
+    - type: space
+      key: concepts
+      title: Core Concepts
+      path: concepts
+      content:
+        directory: ./concepts
+    - type: space
+      key: contracts
+      title: Smart Contracts
+      path: contracts
+      content:
+        directory: ./contract
+    - type: space
+      key: guides
+      title: User Guides
+      path: guides
+      content:
+        directory: ./using
+    - type: space
+      key: developers
+      title: Developer Guide
+      path: developers
+      content:
+        directory: ./developer
+    - type: space
+      key: contributing
+      title: Contributing
+      path: contributing
+      content:
+        directory: ./contributing
+
