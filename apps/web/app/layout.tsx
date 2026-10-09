@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import React from 'react';
+import { WalletProvider } from '../components/WalletProvider';
 
 export const metadata: Metadata = {
   title: 'WarrantX | Programmable On-Chain Treasury Spending Controls',
@@ -16,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="bg-slate-950 text-slate-100 min-h-screen antialiased flex flex-col">
-        {children}
+        <WalletProvider>{children}</WalletProvider>
       </body>
     </html>
   );
