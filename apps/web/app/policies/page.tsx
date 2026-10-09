@@ -7,10 +7,10 @@ import { Button, Card, CardTitle, CardDescription, Badge } from '@warrantx/ui';
 
 export default function PoliciesPage() {
   const [showConfig, setShowConfig] = useState(false);
-  const [spender, setSpender] = useState('GBX...91KA');
-  const [limit, setLimit] = useState('500');
+  const [spender, setSpender] = useState('');
+  const [limit, setLimit] = useState('');
   const [period, setPeriod] = useState('Monthly');
-  const [threshold, setThreshold] = useState('200');
+  const [threshold, setThreshold] = useState('');
   const [requiredApprovals, setRequiredApprovals] = useState(2);
 
   return (
@@ -104,35 +104,7 @@ export default function PoliciesPage() {
 
         {/* Existing Policies Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="glass-panel">
-            <div className="flex justify-between items-start">
-              <div>
-                <Badge variant="cyan" className="mb-2">Version 1 Active</Badge>
-                <CardTitle className="text-lg font-mono text-slate-200">GBX...91KA</CardTitle>
-                <CardDescription>Dev Core Spender Policy</CardDescription>
-              </div>
-              <Badge variant="emerald">Active</Badge>
-            </div>
-
-            <div className="mt-4 pt-4 border-t border-slate-800/80 space-y-2 text-xs">
-              <div className="flex justify-between">
-                <span className="text-slate-400">Spending Period:</span>
-                <span className="font-medium text-slate-200">Monthly</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-400">Monthly Cap:</span>
-                <span className="font-semibold text-emerald-400">500.00 USDC</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-400">Approval Threshold:</span>
-                <span className="font-mono text-amber-400">200.00 USDC</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-slate-400">Required Approvers:</span>
-                <span className="font-medium text-slate-200">2 Approvers</span>
-              </div>
-            </div>
-          </Card>
+          <Card className="glass-panel py-12 text-center text-sm text-slate-500">No indexed spending policies yet.</Card>
         </div>
       </main>
     </div>

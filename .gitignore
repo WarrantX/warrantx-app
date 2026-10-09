@@ -10,3 +10,4 @@ coverage/
 *.tsbuildinfo
 packages/*/src/*.js
 packages/*/src/*.d.ts
+.vercel

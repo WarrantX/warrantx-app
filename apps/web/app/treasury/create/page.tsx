@@ -9,7 +9,7 @@ import { Button, Card, CardTitle, CardDescription } from '@warrantx/ui';
 export default function CreateTreasuryPage() {
   const [name, setName] = useState('');
   const [orgId, setOrgId] = useState('ORG1');
-  const [assetAddress, setAssetAddress] = useState('CC4W...USDC');
+  const [assetAddress, setAssetAddress] = useState('');
   const [isDeploying, setIsDeploying] = useState(false);
   const [success, setSuccess] = useState(false);
 

@@ -31,10 +31,10 @@ export default function TreasuryPage() {
           <Card className="glass-panel border-emerald-500/30">
             <div className="flex items-start justify-between">
               <div>
-                <Badge variant={contractId ? 'emerald' : 'amber'} className="mb-2">{contractId ? 'Configured Contract Treasury' : 'Demo Preview'}</Badge>
-                <CardTitle className="text-xl">Core Protocol Treasury</CardTitle>
+                <Badge variant={contractId ? 'emerald' : 'amber'} className="mb-2">{contractId ? 'Configured Contract Treasury' : 'Awaiting deployment'}</Badge>
+                <CardTitle className="text-xl">WarrantX Treasury</CardTitle>
                 <p className="text-xs font-mono text-slate-400 mt-1">
-                  {contractId || 'No contract configured - sample values only'}
+                  {contractId || 'No contract configured'}
                 </p>
               </div>
               <div className="p-3 bg-emerald-500/10 rounded-xl text-emerald-400">
@@ -45,11 +45,11 @@ export default function TreasuryPage() {
             <div className="mt-6 pt-4 border-t border-slate-800/80 flex justify-between items-center text-sm">
               <div>
                 <span className="text-xs text-slate-400 block">Accepted Asset</span>
-                <span className="font-semibold text-slate-200">USDC (Stellar Asset)</span>
+                <span className="font-semibold text-slate-200">{contractId ? 'Configured on-chain asset' : '—'}</span>
               </div>
               <div className="text-right">
                 <span className="text-xs text-slate-400 block">Balance</span>
-                <span className="font-bold text-emerald-400 text-lg">12,500.00 USDC</span>
+                <span className="font-bold text-emerald-400 text-lg">—</span>
               </div>
             </div>
 

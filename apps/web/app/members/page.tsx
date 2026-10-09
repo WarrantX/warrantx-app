@@ -66,33 +66,7 @@ export default function MembersPage() {
                   <th className="pb-3 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
-                <tr>
-                  <td className="py-3.5 font-mono text-xs text-slate-200">GAAX...4K9Z (You)</td>
-                  <td className="py-3.5"><Badge variant="emerald">Admin</Badge></td>
-                  <td className="py-3.5"><Badge variant="emerald">Active</Badge></td>
-                  <td className="py-3.5 text-xs text-slate-400">2026-10-01</td>
-                  <td className="py-3.5 text-right"><span className="text-xs text-slate-500">Owner</span></td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 font-mono text-xs text-slate-300">GBX...91KA</td>
-                  <td className="py-3.5"><Badge variant="cyan">Spender</Badge></td>
-                  <td className="py-3.5"><Badge variant="emerald">Active</Badge></td>
-                  <td className="py-3.5 text-xs text-slate-400">2026-10-02</td>
-                  <td className="py-3.5 text-right">
-                    <Button variant="ghost" size="sm" className="text-rose-400">Suspend</Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 font-mono text-xs text-slate-300">GCD...88MZ</td>
-                  <td className="py-3.5"><Badge variant="amber">Approver</Badge></td>
-                  <td className="py-3.5"><Badge variant="emerald">Active</Badge></td>
-                  <td className="py-3.5 text-xs text-slate-400">2026-10-03</td>
-                  <td className="py-3.5 text-right">
-                    <Button variant="ghost" size="sm" className="text-rose-400">Suspend</Button>
-                  </td>
-                </tr>
-              </tbody>
+              <tbody><tr><td colSpan={5} className="py-10 text-center text-sm text-slate-500">No indexed treasury members yet.</td></tr></tbody>
             </table>
           </div>
         </Card>

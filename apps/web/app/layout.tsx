@@ -5,6 +5,7 @@ import React from 'react';
 export const metadata: Metadata = {
   title: 'WarrantX | Programmable On-Chain Treasury Spending Controls',
   description: 'Manage organization treasuries on Stellar with contract-enforced spending limits, recurring allowances, and policy-based approval thresholds.',
+  icons: { icon: '/warrantx-mark.png', apple: '/warrantx-mark.png' },
 };
 
 export default function RootLayout({
