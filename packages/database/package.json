@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.2.8",
-    "drizzle-orm": "^0.30.10",
+    "drizzle-orm": "^0.45.2",
     "pg": "^8.11.3"
   },
   "devDependencies": {
     "@types/pg": "^8.11.2",
-    "drizzle-kit": "^0.20.18",
+    "drizzle-kit": "^0.31.5",
     "typescript": "^5.3.3"
   }
 }

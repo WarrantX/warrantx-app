@@ -13,6 +13,8 @@ Use `.env.example` as the canonical inventory. Variables prefixed with `NEXT_PUB
 | `STELLAR_FACTORY_CONTRACT_ID` | Application | Yes | Deployed treasury factory contract |
 | `NEXT_PUBLIC_STELLAR_NETWORK` | Web | Yes | Network displayed and used by browser transaction code |
 | `NEXT_PUBLIC_TREASURY_CONTRACT_ID` | Web | Yes | Treasury ID exposed to the browser |
+| `NEXT_PUBLIC_FACTORY_CONTRACT_ID` | Web | For treasury creation | Factory ID exposed to the browser |
+| `NEXT_PUBLIC_STELLAR_RPC_URL` | Web | Yes | Browser-safe Soroban RPC endpoint |
 | `WARRANTX_API_URL` | Web server runtime | Injected | Private Vercel service binding to the API |
 
 ## Rules

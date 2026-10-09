@@ -2,7 +2,13 @@
 
 ## Current release
 
-WarrantX v0.1 is a testnet preview intended for technical evaluation, contributor onboarding, and end-to-end deployment testing.
+WarrantX v0.1.1 is a testnet preview intended for technical evaluation and contributor onboarding. The public frontend, API, documentation, and treasury contract are deployed and linked below.
+
+- Frontend: https://warrantx-app.vercel.app
+- API health: https://warrantx-api.onrender.com/api/v1/health
+- Treasury contract: `CATX47HYXQMHZALH3HYM6JKILXYGPVU324RKQZBPKEJH7TOVAEPMYT2R`
+- Contract explorer: https://stellar.expert/explorer/testnet/contract/CATX47HYXQMHZALH3HYM6JKILXYGPVU324RKQZBPKEJH7TOVAEPMYT2R
+- Documentation: https://entity-6.gitbook.io/warrantx-documentation
 
 ## Implemented
 
@@ -18,7 +24,7 @@ WarrantX v0.1 is a testnet preview intended for technical evaluation, contributo
 
 - The contracts have not completed an independent audit.
 - The release does not publish canonical mainnet contract addresses.
-- The UI still requires completion of the production wallet and transaction flows tracked in GitHub issues.
+- Treasury creation requires a deployed factory ID. Deposit and payment-request screens submit real wallet-signed Soroban transactions when configured.
 - Operational monitoring, disaster recovery, and automated testnet smoke deployment remain release work.
 
 ## Evaluation guidance

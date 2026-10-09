@@ -5,19 +5,36 @@ import Link from 'next/link';
 import { Navbar } from '../../../components/Navbar';
 import { ArrowLeft, ArrowDownLeft } from 'lucide-react';
 import { Button, Card, CardTitle, CardDescription } from '@warrantx/ui';
+import { Address, nativeToScVal } from '@stellar/stellar-sdk';
+import { useWallet } from '../../../components/WalletProvider';
+import { submitContractTransaction, toStroops } from '../../../lib/contract-transaction';
 
 export default function DepositPage() {
   const [amount, setAmount] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [transactionHash, setTransactionHash] = useState<string | null>(null);
+  const { address, connect, isConnecting } = useWallet();
+  const contractId = process.env.NEXT_PUBLIC_TREASURY_CONTRACT_ID;
 
-  const handleDeposit = (e: React.FormEvent) => {
+  const handleDeposit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!address || !contractId) return;
     setIsSubmitting(true);
-    setTimeout(() => {
+    setError(null);
+    try {
+      const result = await submitContractTransaction(contractId, 'deposit', [
+        new Address(address).toScVal(),
+        nativeToScVal(toStroops(amount), { type: 'i128' }),
+      ], address);
+      setTransactionHash(result.hash);
       setIsSubmitting(false);
       setSuccess(true);
-    }, 1200);
+    } catch (submissionError) {
+      setError(submissionError instanceof Error ? submissionError.message : 'Deposit failed');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -42,6 +59,7 @@ export default function DepositPage() {
             <div className="mt-6 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm text-center">
               <p className="font-semibold">Deposit Confirmed on Stellar Ledger!</p>
               <p className="text-xs text-slate-300 mt-1">{amount} USDC deposited into Treasury Contract</p>
+              {transactionHash && <a className="block mt-2 underline" href={`https://stellar.expert/explorer/testnet/tx/${transactionHash}`} target="_blank" rel="noreferrer">View transaction</a>}
               <Link href="/dashboard" className="inline-block mt-4">
                 <Button variant="primary" size="sm">Return to Dashboard</Button>
               </Link>
@@ -53,7 +71,7 @@ export default function DepositPage() {
                 <input
                   type="text"
                   disabled
-                  value="Core Protocol Treasury (CC2W...9K1Z)"
+                  value={contractId || 'Treasury contract is not configured'}
                   className="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-400 font-mono"
                 />
               </div>
@@ -71,9 +89,14 @@ export default function DepositPage() {
                 />
               </div>
 
-              <Button type="submit" variant="primary" className="w-full mt-4" isLoading={isSubmitting}>
+              {error && <p className="text-sm text-red-400">{error}</p>}
+              {!address ? (
+                <Button type="button" variant="primary" className="w-full mt-4" isLoading={isConnecting} onClick={() => void connect()}>
+                  Connect Testnet Wallet
+                </Button>
+              ) : <Button type="submit" variant="primary" className="w-full mt-4" isLoading={isSubmitting} disabled={!contractId}>
                 Sign & Submit On-Chain Deposit
-              </Button>
+              </Button>}
             </form>
           )}
         </Card>
