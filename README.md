@@ -4,7 +4,7 @@
 [![Stellar](https://img.shields.io/badge/Stellar-Soroban-black)](https://stellar.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-[Live application](https://warrantx-app.vercel.app) · [Documentation](https://entity-6.gitbook.io/warrantx-documentation) · [Testnet contract](https://stellar.expert/explorer/testnet/contract/CATX47HYXQMHZALH3HYM6JKILXYGPVU324RKQZBPKEJH7TOVAEPMYT2R) · [API health](https://warrantx-api.onrender.com/api/v1/health)
+[Live application](https://warrantx-app.vercel.app) · [Documentation](https://entity-6.gitbook.io/warrantx-documentation) · [Testnet contract](https://stellar.expert/explorer/testnet/contract/CATX47HYXQMHZALH3HYM6JKILXYGPVU324RKQZBPKEJH7TOVAEPMYT2R) · API health: [primary](https://warrantx-api.onrender.com/api/v1/health) / [fallback](https://warrantx-app.onrender.com/api/v1/health)
 
 WarrantX is an open-source Stellar treasury application for teams that need enforceable spending limits, recurring allowances, and multi-approver payments. This repository contains the web dashboard, API, event indexer, shared UI and validation packages, and TypeScript SDK. The companion contracts repository is the source of authority for treasury state and transfers.
 

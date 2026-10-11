@@ -8,10 +8,6 @@
   },
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://warrantx-api.onrender.com/api/$1"
-    },
-    {
       "source": "/(.*)",
       "destination": {
         "service": "web"

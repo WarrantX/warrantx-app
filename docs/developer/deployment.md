@@ -2,19 +2,18 @@
 
 ## Application services
 
-The repository contains a Vercel Services configuration with two public services:
+The repository contains a Vercel Services configuration for the public web service:
 
 - `web` serves Next.js at `/*`.
-- `api` serves Express at `/api/*`.
 
-The web service has a private binding to the API through `WARRANTX_API_URL`. Vercel injects this value at runtime.
+The web service handles `/api/*` through a server-side proxy. It tries the primary API first and automatically uses the fallback after a network error, an eight-second timeout, rate limiting, or a server error.
 
 ## Deploy to Vercel
 
 1. Import `WarrantX/warrantx-app` from GitHub.
 2. Select the **Services** application preset and keep the repository root as the root directory.
-3. Confirm Vercel detects `web` and `api` from `vercel.json`.
-4. Add the variables listed in [Environment variables](environment-variables.md), excluding `WARRANTX_API_URL`.
+3. Confirm Vercel detects `web` from `vercel.json`.
+4. Add the required variables listed in [Environment variables](environment-variables.md). The hosted primary and fallback API origins work without additional variables.
 5. Deploy a preview and verify `/` and `/api/v1/health`.
 6. Promote only after the smoke checks below pass.
 
