@@ -15,12 +15,13 @@ Use `.env.example` as the canonical inventory. Variables prefixed with `NEXT_PUB
 | `NEXT_PUBLIC_TREASURY_CONTRACT_ID` | Web | Yes | Treasury ID exposed to the browser |
 | `NEXT_PUBLIC_FACTORY_CONTRACT_ID` | Web | For treasury creation | Factory ID exposed to the browser |
 | `NEXT_PUBLIC_STELLAR_RPC_URL` | Web | Yes | Browser-safe Soroban RPC endpoint |
-| `WARRANTX_API_URL` | Web server runtime | Injected | Private Vercel service binding to the API |
+| `WARRANTX_API_URL` | Web server runtime | No | Primary API origin; defaults to `https://warrantx-api.onrender.com` |
+| `WARRANTX_API_FALLBACK_URL` | Web server runtime | No | Secondary API origin used after primary network errors, timeouts, rate limits, or server errors; defaults to `https://warrantx-app.onrender.com` |
 
 ## Rules
 
 - All Stellar variables must refer to the same network and deployment.
-- Do not create `WARRANTX_API_URL` manually in Vercel; the service binding owns it.
+- Keep API origins free of a trailing slash. The web proxy tries `WARRANTX_API_URL` first, followed by `WARRANTX_API_FALLBACK_URL` and the hosted defaults.
 - Rotate `AUTH_SECRET` if it is exposed. Rotation invalidates existing API sessions.
 - Use a pooled PostgreSQL URL when the hosting provider recommends one for serverless functions.
 - Never store a Stellar secret key in the web or API environment.
